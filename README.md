@@ -19,7 +19,7 @@ For other networks the use of tcpberry is a hit or miss process. It is not easy 
 pub cmnd/tasmotaTopic/webserver
 ```
 
-Then there are a myriad of network configurations, most Access Points create their own NAT and obviously the laptop and the ESP must be connected to the same AP (Which is not certain if you are on a Work or Public network).
+Then there is a myriad of network configurations, most Access Points create their own NAT and obviously the laptop and the ESP must be connected to the same AP (Which is not certain if you are on a Work or Public network).
 
 And finally there are Access Points isolating the clients (as a security measure) blocking all direct protocols including tcpberry. Probably the most realistic way of using tcpberry on those cases, is using your mobile phone as Access Point for your PC/Laptop and for ESP32.
 
