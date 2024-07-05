@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# cd to the directory the shell script is stored
+cd `dirname -- "$0"`
+
+export BERRY_COMMAND="RUN"
+if [ "$1" = "-s" ]
+then
+  export BERRY_COMMAND="SAVE"
+fi
+
+# We can only use tcpberry to upload mqttberry
+export BERRY_FILENAME="mqttberry.be"
+export UPLOAD_MODE="TCP"
+export TCP_SERVER="192.168.2.201:1001"
+
+berryupload

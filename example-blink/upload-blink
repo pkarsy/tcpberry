@@ -1,0 +1,29 @@
+#!/bin/sh
+
+# cd to the directory the shell script is stored
+cd `dirname -- "$0"`
+
+export UPLOAD_MODE="TCP"
+#export UPLOAD_MODE="MQTT"
+
+export BERRY_FILENAME="blink.be"
+#
+# can be "RUN" (compile and run without writing to flash)
+# or "SAVE" (compile run and save to flash filesystem)
+# Most of the time you want the "RUN" command to avoid flash wear
+export BERRY_COMMAND="RUN"
+if [ "$1" = "-s" ]
+then
+  export BERRY_COMMAND="SAVE"
+fi
+
+#
+export TCP_SERVER="192.168.2.201:1001"
+#
+export MQTT_SERVER="tls://mqtt.aserver.io:8883"
+export MQTT_USERNAME="someusername"
+export MQTT_PASSWORD="xyz"
+# The topic is changed with "topic ..." tasmota command (or the web interface)
+export MQTT_TOPIC="devel"
+#
+berryupload
