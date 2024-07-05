@@ -46,7 +46,7 @@ It is slower than tcpberry (but still perfectly OK) and needs 2-3 seconds for a 
 
 This is the PC-side program that performs the upload.
 
-It is not designed to run directly, it does not accept command line arguments, only environment variables. The idea is to have a shell script in a project directory and the script sets the environment and calls the berryuploader. The examples contain this shell script to modify and use for your own projects
+It is not designed to run directly, it does not accept command line arguments, only environment variables. The idea is to have a shell script in a project directory and the script sets the environment and calls the berryuploader. The examples contain such a shell script. You can modify and use it for your projects.
 
 The uploader can work with a TCP socket (tcpberry must be loaded on the ESP) or MQTT messages (mqttberry must be loaded). Probably you want to have both servers running on the ESP32.
 
@@ -113,7 +113,8 @@ load("myModule")
 
 ## Code save
 
-When we have finished editing the berry script, we can also save it to ESP32
+When we have finished editing the berry script, we can also save it to ESP32.
+
 All upload scripts "upload-blink" etc. accept the "-s" option. Look at the upload script itself
 to see how the -s option works.
 
