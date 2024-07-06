@@ -34,13 +34,14 @@ def mqttberry_func()
     var filename
     #
     def init()
-      self.topic = 'mqttberry/devel/upload' # TODO devel calculate
-      self.publish = 'mqttberry/devel/report'
+      var topic = tasmota.cmd('Topic', true)['Topic']
+      self.topic = 'mqttberry/' + topic + '/upload' # TODO devel calculate
+      self.publish = 'mqttberry/' + topic + '/report'
       mqtt.subscribe(self.topic, /topic,idx,pkt->self.process_message(pkt) )
       self.state = 1
       self.buf=''
       self.millis = 0
-      log(brmsg + 'Listening for berry code via MQTT')
+      log(brmsg + 'Waiting for berry code via MQTT ' + self.topic)
     end
 
     # Used when developing MQTTBERRY, see comment at top
@@ -74,7 +75,7 @@ def mqttberry_func()
         var cmd = pkt[0..1]
         self.bufsize = int('0x' + pkt[2..7])
         self.remote_crc = int('0x' + pkt[8..15])
-        print(self.bufsize, self.remote_crc)
+        #print(self.bufsize, self.remote_crc)
         pkt = pkt[16..]
         if cmd == 'CR'
           if size(pkt) != 0
