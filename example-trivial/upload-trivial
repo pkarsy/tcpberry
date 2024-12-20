@@ -18,7 +18,7 @@ then
   export BERRY_COMMAND="SAVE"
 fi
 
-export TCP_SERVER="192.168.2.201:1001"
+export TCP_SERVER="192.168.2.202:1001"
 
 export MQTT_SERVER="tls://mqtt.aserver.io:8883"
 export MQTT_USERNAME="someusername"

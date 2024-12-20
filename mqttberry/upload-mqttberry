@@ -12,6 +12,6 @@ fi
 # We can only use tcpberry to upload mqttberry
 export BERRY_FILENAME="mqttberry.be"
 export UPLOAD_MODE="TCP"
-export TCP_SERVER="192.168.2.201:1001"
+export TCP_SERVER="192.168.2.202:1001"
 
 berryupload
