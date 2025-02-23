@@ -53,7 +53,9 @@ The repository contains the berryuploader executable precompiled for linux and w
 
 ## Installation
 
-PC side : (Instructions for linux)
+### Developer machine side
+
+#### PC: (Instructions for linux)
 
 ```sh
 cd ~/Programming # Use any dir you prefer
@@ -63,7 +65,26 @@ cd ~/bin # Or anywher you prefer in  PATH
 ln -s ~/Programming/tcpberry/berryupload/berryupload .
 ```
 
-ESP32x side: Upload "tcpberry.be" and "mqttberry.be" to the filesystem. In "autoexec.be" add the lines
+#### Mac OS (Apple Silicon)
+
+It assumes you have already installed brew and berry interpreter.
+
+```sh
+cd ~/Documents/Berry\ Tasmota/ # Use any dir you prefer
+git clone https://github.com/pkarsy/tcpberry
+#Now we will recompile berryuploader for Silicon Mac. It assumes you have golang installed. If not run `brew install golang`.
+cd tcpberry/berryupload
+go build
+ls -al # Make sure new date and time is next to berryupload file. It means the file was successfully rebuilt. You can also try to run it ./berryupload - it should return an error about missing UPLOAD_MODE env var.
+cd ../example-trivial
+vi upload-trivial  
+```
+
+Go to the last line and replace `berryupload` with `~/Documents/Berry\ Tasmota/tcpberry/berryupload/berryupload`.
+
+### ESP32x side:
+
+Upload "tcpberry.be" and "mqttberry.be" to the filesystem. In "autoexec.be" add the lines
 
 ```sh
 load('tcpberry')
