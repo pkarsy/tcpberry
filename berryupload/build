@@ -2,4 +2,4 @@ CGO_ENABLED=0 go build -ldflags="-s -w" -trimpath
 
 CGO_ENABLED=0 GOOS=windows GOARCH=386 go build -ldflags="-s -w" -trimpath
 
-
+CGO_ENABLED=0 GOOS=darwin GOARCH=arm64 go build -o berryupload.m1 -ldflags="-s -w" -trimpath
