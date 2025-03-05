@@ -196,6 +196,7 @@ def mqttberry_func()
   end
   #
   # We need just one instance
+  print('Starting mqttberry')
   global.mqttberry = MQTTBERRY()
   #
 end
