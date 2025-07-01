@@ -129,8 +129,10 @@ def tcpberry_func()
       if self.state == 1 # Waiting for the header
         if size(self.buf)<16 return end # We need at least the header
         var cmd = self.buf[0..1]
-        self.bufsize = int('0x' + self.buf[2..7])
-        self.remote_crc = int('0x' + self.buf[8..15])
+        #self.bufsize = int('0x' + self.buf[2..7])
+        #self.remote_crc = int('0x' + self.buf[8..15])
+        self.bufsize = bytes.get(bytes().fromhex(self.buf[2..7]), 0 , -3)
+        self.remote_crc = bytes.get(bytes().fromhex(self.buf[8..15]), 0 , -4)
         self.buf = self.buf[16..]
         if cmd == 'CR'
           self.state = 3

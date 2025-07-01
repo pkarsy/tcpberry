@@ -72,10 +72,10 @@ def mqttberry_func()
         if size(pkt)<16
           return self.end_upload('Very short packet (less than 16 bytes)')
         end
-        var cmd = pkt[0..1]
-        self.bufsize = int('0x' + pkt[2..7])
-        self.remote_crc = int('0x' + pkt[8..15])
-        #print(self.bufsize, self.remote_crc)
+        var cmd = pkt[0..1]        
+        self.bufsize = bytes.get(bytes().fromhex(pkt[2..7]), 0 , -3)
+        self.remote_crc = bytes.get(bytes().fromhex(pkt[8..15]), 0 , -4)
+        # print(self.bufsize, self.remote_crc)
         pkt = pkt[16..]
         if cmd == 'CR'
           if size(pkt) != 0
@@ -84,10 +84,6 @@ def mqttberry_func()
         elif cmd == 'CS'
           if size(pkt)>3 && pkt[-3..-1]=='.be'
             self.filename = pkt
-            # print("Got filename", self.filename)
-            # mqtt.publish(self.publish, 'HEADER OK') # This is mandatory for berryupload to continue sending packets
-            # self.state = 2 # actual code
-            # return
           else
             return self.end_upload('No filename given')
           end
@@ -116,10 +112,12 @@ def mqttberry_func()
         #var buf = self.buf # we store it in a var
         #self.buf=''
         mqtt.publish(self.publish, 'Transfered ' .. self.bufsize .. ' bytes')
-        if self.remote_crc != self.calc_crc()
+        var local_crc = self.calc_crc()
+        if local_crc != self.remote_crc
           #var msg= brmsg +'CRC is incorrect'
           #log(msg)
-          self.end_upload('CRC is incorrect')
+          #mqtt.publish('local CRC=' .. self.calc_crc() .. ' remote CRC=' .. self.remote_crc)
+          self.end_upload('CRC is incorrect. local crc='.. local_crc .. ' remote crc=' .. self.remote_crc)
           return
         end
         var fun # will hold the compiled code as a function ready to run
