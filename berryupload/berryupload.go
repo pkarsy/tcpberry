@@ -9,6 +9,7 @@ import (
 	"net"
 	"os"
 	"time"
+	"strings"
 
 	mqtt "github.com/eclipse/paho.mqtt.golang"
 )
@@ -116,6 +117,9 @@ func upload_tcp() {
 	if tcpserver == "" {
 		fmt.Println("TCP_SERVER environment var is missing")
 		return
+	}
+	if !strings.Contains(tcpserver, ":") {
+		tcpserver += ":1001"
 	}
 	conn, err := net.Dial("tcp", tcpserver)
 	if err != nil {
