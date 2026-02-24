@@ -4,11 +4,11 @@
 
 Tasmota's Berry scripting offers an accessible way to automate tasks that don't need millisecond precision. The Tasmota system handles all the boring infrastructure - WiFi, MQTT, GPIO, sensors - allowing you to focus your Berry code purely on your application's logic.
 
-However, the traditional development workflow is slow: edit, save to flash, reboot, check logs. This tool aims for **productivity** by enabling a fast **edit → run → feedback** loop. Code uploads in seconds and executes immediately in RAM - no flash wear, no reboots.
+However, the standard development workflow is slow: edit, save to flash, reboot, check. This tool aims for **productivity** by enabling a fast **edit → run → feedback** loop. Code uploads in seconds and executes immediately in RAM - no flash wear, no reboots.
 
 The TCP version gives you almost instant uploads when working on your local network. The MQTT version goes further, allowing remote upgrades from anywhere - even across different networks. If the code misbehaves, you can fix and redeploy without physical access to the device.
 
-Develop Berry code with the convenience of VSCode (or similar) and upload and run it immediately. The code is loaded to ESP32 memory so no flash wear is happening.
+This way you can edit Tasmota/Berry code with the convenience of VSCode (or similar) and upload and see the results immediately.
 
 Do not confuse this with Tasmota OTA updates, which update the tasmota system itself (including the berry interpreter).
 
@@ -22,7 +22,7 @@ The developer must be at the same LAN, and there is no authentication or encrypt
 
 For other networks, using your mobile phone as an access point is usually the simplest solution.
 
-However the most simple solution is mqttberry.
+However for remote uploads the most powerful solution is mqttberry.
 
 ## mqttberry (ESP32x daemon)
 
