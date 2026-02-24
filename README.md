@@ -1,5 +1,13 @@
 # Live over the air (OTA) updates for Tasmota Berry code
 
+## Why tcpberry?
+
+Tasmota's Berry scripting offers an accessible way to automate tasks that don't need millisecond precision. The Tasmota system handles all the boring infrastructure - WiFi, MQTT, GPIO, sensors - allowing you to focus your Berry code purely on your application's logic.
+
+However, the traditional development workflow is slow: edit, save to flash, reboot, check logs. This tool aims for **productivity** by enabling a fast **edit → run → feedback** loop. Code uploads in seconds and executes immediately in RAM - no flash wear, no reboots.
+
+The TCP version gives you almost instant uploads when working on your local network. The MQTT version goes further, allowing remote upgrades from anywhere - even across different networks. If the code misbehaves, you can fix and redeploy without physical access to the device.
+
 Develop Berry code with the convenience of VSCode (or similar) and upload and run it immediately. The code is loaded to ESP32 memory so no flash wear is happening.
 
 Do not confuse this with Tasmota OTA updates, which update the tasmota system itself (including the berry interpreter).
@@ -12,15 +20,7 @@ Opens a TCP 1001 port on the ESP32(-C3, S2, S3) and waits for code from the PC. 
 
 The developer must be at the same LAN, and there is no authentication or encryption, so probably can only be used in a LAN (probably home) controlled by the developer.
 
-For other networks, the use of tcpberry is a hit-or-miss process. It is not easy to find the IP of the ESP32 as mDNS is unreliable on a lot of networks. The most reliable way I found is to query the IP using MQTT, for example:
-
-```bash
-pub cmnd/tasmotaTopic/webserver
-```
-
-Then there is a myriad of network configurations. Most access points create their own NAT, and obviously the laptop and the ESP must be connected to the same AP (which is not certain if you are on a work or public network).
-
-And finally there are access points isolating the clients (as a security measure) blocking all direct protocols including tcpberry. Probably the most realistic way of using tcpberry in those cases is using your mobile phone as an access point.
+For other networks, using your mobile phone as an access point is usually the simplest solution.
 
 However the most simple solution is mqttberry.
 
